@@ -45,7 +45,7 @@
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:Plant}">
                     <Image Width="100" Height="100"
-                        Source="/Assets/Fougere.jpg" />
+                        Source="/Assets/Fougere.png" />
                 </DataTemplate>
 
             </ItemsControl.DataTemplates>

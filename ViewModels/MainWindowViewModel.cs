@@ -15,13 +15,16 @@ public partial class MainWindowViewModel : GameBase
 
     private TRex trex;
     private Stegosaure stegosaure;
+    private Plant plant;
     public ObservableCollection<GameObject> GameObjects { get; } = new();
 
     public MainWindowViewModel(){
         trex = new TRex(new Point(Width/2-32, Height/2-32), new Point(4.0,2.0), 500, "alive");
         stegosaure = new Stegosaure(new Point(0,0), new Point(2.5, 2.0), 800, "alive");
+        plant = new Plant(new Point(Width/2, Height/2),new Point(0.0,0.0),600,"alive");
         GameObjects.Add(trex);
         GameObjects.Add(stegosaure);
+        GameObjects.Add(plant);
 
     }
     protected override void Tick(){
