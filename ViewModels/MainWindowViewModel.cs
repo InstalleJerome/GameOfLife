@@ -32,15 +32,17 @@ public partial class MainWindowViewModel : GameBase
 
         List<GameObject> toRemove = new List<GameObject>();
         
-        foreach (GameObject objet in GameObjects){
+        foreach (Animal objet in GameObjects){
             if (objet.Location.Y<0 || objet.Location.Y>Height-100){
                 objet.Velocity = new Point(objet.Velocity.X, -objet.Velocity.Y);
             }
             if (objet.Location.X>Width-100 || objet.Location.X<0){
                 objet.Velocity = new Point(-objet.Velocity.X, objet.Velocity.Y);
             }
-            if (objet.Health==0){
-                toRemove.Add(objet);
+        }
+        foreach (Living_Object obj in GameObjects){
+            if (obj.Health==0){
+                toRemove.Add(obj);
             }
         }
 
@@ -49,9 +51,19 @@ public partial class MainWindowViewModel : GameBase
         }
 
 
-        foreach (GameObject objet in GameObjects){
+        foreach (Stegosaure objet in GameObjects){
             objet.Tick();
         }
+        foreach (TRex objet in GameObjects){
+            objet.Tick();
+        }
+        foreach (Plant objet in GameObjects){
+            objet.Tick();
+        }
+        foreach (Meat objet in GameObjects){
+            objet.Tick();
+        }
+        
     }
     
 
