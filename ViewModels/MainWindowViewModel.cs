@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Input;
+using GameOfLife.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,9 +20,9 @@ public partial class MainWindowViewModel : GameBase
     public ObservableCollection<GameObject> GameObjects { get; } = new();
 
     public MainWindowViewModel(){
-        trex = new TRex(new Point(Width/2-32, Height/2-32), new Point(4.0,2.0), 500, "alive");
-        stegosaure = new Stegosaure(new Point(0,0), new Point(2.5, 2.0), 800, "alive");
-        plant = new Plant(new Point(Width/2, Height/2),new Point(0.0,0.0),600,"alive");
+        trex = new TRex(new Point(Width/2-32, Height/2-32), 500, new Point(4.0,2.0), null);
+        stegosaure = new Stegosaure(new Point(0,0), 800, new Point(2.5, 2.0), null);
+        plant = new Plant(new Point(Width/2, Height/2),600, null);
         GameObjects.Add(trex);
         GameObjects.Add(stegosaure);
         GameObjects.Add(plant);
@@ -38,19 +39,9 @@ public partial class MainWindowViewModel : GameBase
             if (objet.Location.X>Width-100 || objet.Location.X<0){
                 objet.Velocity = new Point(-objet.Velocity.X, objet.Velocity.Y);
             }
-            if (objet.Health<=0 && objet.Status == "alive"){
-                objet.Velocity = new Point(0.0, 0.0);
-                objet.Status = "dead";
-                objet.Health = 500;
-            }
-            if (objet.Health<=0 && objet.Status == "dead"){
-                objet.Status = "rotting";
-                objet.Health = 500;
-            }
-            if (objet.Health<=0 && objet.Status=="rotting"){
+            if (objet.Health==0){
                 toRemove.Add(objet);
             }
-            Console.WriteLine("Tick window");
         }
 
         foreach(GameObject obj in toRemove) {
