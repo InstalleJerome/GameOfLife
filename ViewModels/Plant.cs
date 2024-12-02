@@ -5,12 +5,12 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace GameOfLife.ViewModels;
 
-public partial class Plant : GameObject{
+public partial class Plant : Living_Object{
 
-    public Plant(Point location, Point velocity, int health, string status) : base (location, velocity, health, status){
+    public Plant(Point location, int health) : base (location, health){
 
     }
-    public override void Tick(){
+    public void Tick(){
         Health--;
     }
 }

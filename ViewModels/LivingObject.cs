@@ -1,7 +1,6 @@
 using Avalonia;
 using CommunityToolkit.Mvvm.ComponentModel;
 using GameOfLife.ViewModels;
-using Pong.ViewModels;
 
 namespace GameOfLife.ViewModels;
 

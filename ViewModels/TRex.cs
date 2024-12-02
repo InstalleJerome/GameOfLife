@@ -5,13 +5,15 @@ using CommunityToolkit.Mvvm.ComponentModel;
 namespace GameOfLife.ViewModels;
 
 
-public partial class TRex : GameObject {
+public partial class TRex : Animal {
+    [ObservableProperty]
+    private Type target;
 
-    public TRex(Point location, Point velocity, int health, string status) : base (location, velocity, health, status){
-
+    public TRex(Point location, int health, Point velocity, Type target) : base (location, health, velocity){
+        Target = target;
     }
 
-    public override void Tick(){
+    public void Tick(){
         Location = Location + Velocity;
         Health--;
     }
