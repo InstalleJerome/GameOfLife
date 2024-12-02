@@ -1,8 +1,9 @@
 using Avalonia;
 using CommunityToolkit.Mvvm.ComponentModel;
 using GameOfLife.ViewModels;
+using Pong.ViewModels;
 
-namespace Pong.ViewModels;
+namespace GameOfLife.ViewModels;
 
 public partial class Living_Object : GameObject{
     [ObservableProperty]

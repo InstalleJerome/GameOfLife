@@ -2,7 +2,7 @@ using Avalonia;
 using CommunityToolkit.Mvvm.ComponentModel;
 using GameOfLife.ViewModels;
 
-namespace Pong.ViewModels;
+namespace GameOfLife.ViewModels;
 
 // représente un objet affichable sur l'interface
 public abstract partial class GameObject : ViewModelBase
