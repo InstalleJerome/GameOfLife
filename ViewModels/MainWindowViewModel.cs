@@ -65,7 +65,6 @@ public partial class MainWindowViewModel : GameBase
         foreach(GameObject obj in toAdd){
             GameObjects.Add(obj);
         }
-        toAdd=new List<GameObject>();
 
         foreach (GameObject obj in GameObjects){
             obj.Tick();
