@@ -7,14 +7,12 @@ namespace GameOfLife.ViewModels;
 
 
 public partial class Stegosaure : Animal {
-    [ObservableProperty]
-    private Type target;
-
-    public Stegosaure(Point location, int health, Point velocity, Type target) : base (location, health, velocity){
-        Target = target;
+    
+    public Stegosaure(Point location, int health, Point velocity) : base (location, health, velocity){
+        
     }
 
-    public void Tick(){
+    public override void Tick(){
         Location = Location + Velocity;
         Health--;
     }

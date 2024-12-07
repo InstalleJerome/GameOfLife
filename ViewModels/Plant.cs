@@ -6,13 +6,11 @@ using CommunityToolkit.Mvvm.ComponentModel;
 namespace GameOfLife.ViewModels;
 
 public partial class Plant : Living_Object{
-    [ObservableProperty]
-    private Type target;
 
-    public Plant(Point location, int health, Type target) : base (location, health){
-        Target = target;
+    public Plant(Point location, int health) : base (location, health){
+
     }
-    public void Tick(){
+    public override void Tick(){
         Health--;
     }
 }

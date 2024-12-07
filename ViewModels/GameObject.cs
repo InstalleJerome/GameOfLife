@@ -14,4 +14,5 @@ public abstract partial class GameObject : ViewModelBase
     {
         Location = location;
     }
+    public abstract void Tick();
 }

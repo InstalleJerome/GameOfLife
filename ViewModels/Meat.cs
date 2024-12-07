@@ -11,7 +11,7 @@ public partial class Meat : Living_Object{
 
     }
 
-    public void Tick(){
+    public override void Tick(){
         Health--;
     }
 }

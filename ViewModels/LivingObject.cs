@@ -10,4 +10,8 @@ public partial class Living_Object : GameObject{
     public Living_Object(Point location, int health) : base(location){
         Health = health;
     }
+
+    public override void Tick(){
+    }
+
 }
