@@ -40,7 +40,7 @@ public partial class MainWindowViewModel : GameBase
                 Console.WriteLine("life tick");
                 if (obj2.Health==0){
                     toRemove.Add(obj2);
-                    toAdd.Add(new Meat(new Point(trex.Location.X,trex.Location.Y),100));
+                    toAdd.Add(new Meat(new Point(obj2.Location.X,obj2.Location.Y),100));
                 }
                 if (obj is Animal)
             {
@@ -65,6 +65,7 @@ public partial class MainWindowViewModel : GameBase
         foreach(GameObject obj in toAdd){
             GameObjects.Add(obj);
         }
+        toAdd.Clear();
 
         foreach (GameObject obj in GameObjects){
             obj.Tick();
