@@ -29,7 +29,6 @@ public partial class MainWindowViewModel : GameBase
 
     }
     protected override void Tick(){
-        Console.WriteLine("global tick");
         List<GameObject> toRemove = new List<GameObject>();
         List<GameObject> toAdd = new List<GameObject>();
 
@@ -37,39 +36,37 @@ public partial class MainWindowViewModel : GameBase
             if (obj is Living_Object)
             {
                 Living_Object obj2 = (Living_Object)obj;
-                Console.WriteLine("life tick");
                 if (obj2.Health==0){
+                    if (obj2 is Animal){
+                    toAdd.Add(new Meat(new Point(obj2.Location.X,obj2.Location.Y),200));
+                    }
+                    if (obj2 is Plant || obj2 is Meat){
+                        toAdd.Add(new Poop(new Point(obj2.Location.X,obj2.Location.Y),300));
+                    }
                     toRemove.Add(obj2);
-                    toAdd.Add(new Meat(new Point(obj2.Location.X,obj2.Location.Y),100));
                 }
                 if (obj is Animal)
             {
-                Animal obj3 = (Animal)obj2;
-                Console.WriteLine("animal ok");
-                if (obj3.Location.Y<0 || obj3.Location.Y>Height-100){
-                    Console.WriteLine("out of border");
-                    obj3.Velocity = new Point(obj3.Velocity.X, -obj3.Velocity.Y);
-                }
-                if (obj3.Location.X>Width-100 || obj3.Location.X<0){
-                    obj3.Velocity = new Point(-obj3.Velocity.X, obj3.Velocity.Y);
-                }
+                    Animal obj3 = (Animal)obj2;
+                    if (obj3.Location.Y<0 || obj3.Location.Y>Height-100){
+                        obj3.Velocity = new Point(obj3.Velocity.X, -obj3.Velocity.Y);
+                    }
+                    if (obj3.Location.X>Width-100 || obj3.Location.X<0){
+                        obj3.Velocity = new Point(-obj3.Velocity.X, obj3.Velocity.Y);
+                    }
             }
             }
         }
 
-        Console.WriteLine("ok fine");
         foreach(GameObject obj in toRemove) {
-            Console.WriteLine("remove");
             GameObjects.Remove(obj);
         }
         foreach(GameObject obj in toAdd){
             GameObjects.Add(obj);
         }
-        toAdd.Clear();
 
         foreach (GameObject obj in GameObjects){
             obj.Tick();
-            Console.WriteLine("tick");
         }
         
         
