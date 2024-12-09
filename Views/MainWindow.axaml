@@ -45,6 +45,12 @@
                                 Margin = "0,100,0,0"
                                 Foreground  = "Red"
                                 FontSize = "14"/>
+                        <TextBlock Text = "{Binding Energy}"
+                                HorizontalAlignment = "Center"
+                                VerticalAlignment = "Top"
+                                Margin = "0,80,0,0"
+                                Foreground  = "Green"
+                                FontSize = "14"/>
                     </Grid>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:Stegosaure}">
@@ -57,6 +63,12 @@
                                 Margin = "0,100,0,0"
                                 Foreground  = "Red"
                                 FontSize = "14"/>
+                        <TextBlock Text = "{Binding Energy}"
+                                HorizontalAlignment = "Center"
+                                VerticalAlignment = "Top"
+                                Margin = "0,80,0,0"
+                                Foreground  = "Green"
+                                FontSize = "14"/>
                     </Grid>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:Plant}">
@@ -68,6 +80,12 @@
                                 VerticalAlignment = "Top"
                                 Margin = "0,100,0,0"
                                 Foreground  = "Red"
+                                FontSize = "14"/>
+                        <TextBlock Text = "{Binding Energy}"
+                                HorizontalAlignment = "Center"
+                                VerticalAlignment = "Top"
+                                Margin = "0,80,0,0"
+                                Foreground  = "Green"
                                 FontSize = "14"/>
                     </Grid>
                 </DataTemplate>
