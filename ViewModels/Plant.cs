@@ -11,6 +11,11 @@ public partial class Plant : Living_Object{
 
     }
     public override void Tick(){
-        Health--;
+        if (Energy>0){
+            Energy--;
+        }
+        else{
+            Health--;
+        }
     }
 }

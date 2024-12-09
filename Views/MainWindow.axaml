@@ -79,7 +79,7 @@
                                 HorizontalAlignment = "Center"
                                 VerticalAlignment = "Top"
                                 Margin = "0,100,0,0"
-                                Foreground  = "Green"
+                                Foreground  = "Red"
                                 FontSize = "14"/>
                     </Grid>
                 </DataTemplate>
