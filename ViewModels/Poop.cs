@@ -5,7 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace GameOfLife.ViewModels;
 
-public partial class Poop : Living_Object{
+public partial class Poop : GameObject{
 
     public Poop(Point location, int health) : base (location, health){
 

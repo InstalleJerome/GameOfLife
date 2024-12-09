@@ -6,9 +6,10 @@ namespace GameOfLife.ViewModels;
 
 public partial class Living_Object : GameObject{
     [ObservableProperty]
-    private int health;
-    public Living_Object(Point location, int health) : base(location){
+    private int energy;
+    public Living_Object(Point location, int energy,int health) : base(location, health){
         Health = health;
+        Energy = energy;
     }
 
     public override void Tick(){

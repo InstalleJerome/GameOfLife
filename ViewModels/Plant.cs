@@ -7,7 +7,7 @@ namespace GameOfLife.ViewModels;
 
 public partial class Plant : Living_Object{
 
-    public Plant(Point location, int health) : base (location, health){
+    public Plant(Point location, int health, int energy) : base (location, health, energy){
 
     }
     public override void Tick(){

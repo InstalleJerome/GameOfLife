@@ -9,7 +9,7 @@ public partial class TRex : Animal {
 
     
 
-    public TRex(Point location, int health, Point velocity, DateTime lastPoop) : base (location, health, velocity, lastPoop){
+    public TRex(Point location, int health, Point velocity, int energy, DateTime lastPoop) : base (location, health, velocity, energy, lastPoop){
 
     }
 
@@ -18,6 +18,11 @@ public partial class TRex : Animal {
     }
     public override void Tick(){
         Location = Location + Velocity;
-        Health--;
+        if (Energy>0){
+            Energy--;
+        }
+        else{
+            Health--;
+        }
     }
 }

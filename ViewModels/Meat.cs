@@ -5,7 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace GameOfLife.ViewModels;
 
-public partial class Meat : Living_Object{
+public partial class Meat : GameObject{
 
     public Meat(Point location, int health) : base (location, health){
 

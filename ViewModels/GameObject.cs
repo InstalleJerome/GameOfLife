@@ -10,8 +10,12 @@ public abstract partial class GameObject : ViewModelBase
     [ObservableProperty]
     private Point _location;
 
-    protected GameObject(Point location)
+    [ObservableProperty]
+    private int _health;
+
+    protected GameObject(Point location, int health)
     {
+        Health = health;
         Location = location;
     }
     public abstract void Tick();
