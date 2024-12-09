@@ -6,12 +6,16 @@ namespace GameOfLife.ViewModels;
 
 
 public partial class TRex : Animal {
+
     
 
-    public TRex(Point location, int health, Point velocity) : base (location, health, velocity){
+    public TRex(Point location, int health, Point velocity, DateTime lastPoop) : base (location, health, velocity, lastPoop){
 
     }
 
+    public override void Poop(){
+        lastPoop = DateTime.Now;
+    }
     public override void Tick(){
         Location = Location + Velocity;
         Health--;
