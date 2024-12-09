@@ -52,8 +52,16 @@
                         Source="/Assets/Meat.png" />
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:Poop}">
-                    <Image Width="100" Height="100"
-                        Source="/Assets/Poop.png" />
+                    <Grid>
+                        <Image Width="100" Height="100"
+                            Source="/Assets/Poop.png" />
+                        <TextBlock Text = "{Binding Health}"
+                                HorizontalAlignment = "Center"
+                                VerticalAlignment = "Top"
+                                Margin = "0,100,0,0"
+                                Foreground  = "White"
+                                FontSize = "14"/>
+                    </Grid>
                 </DataTemplate>
 
             </ItemsControl.DataTemplates>
