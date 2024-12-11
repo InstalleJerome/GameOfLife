@@ -43,19 +43,18 @@ public partial class MainWindowViewModel : GameBase
             }
             if (obj is Living_Object)
             {
-                Living_Object obj2 = (Living_Object)obj;
-                if (obj2.Health==0){
-                    if (obj2 is Animal){
-                    toAdd.Add(new Meat(new Point(obj2.Location.X,obj2.Location.Y),200));
+                if (obj.Health==0){
+                    if (obj is Animal){
+                    toAdd.Add(new Meat(new Point(obj.Location.X,obj.Location.Y),200));
                     }
-                    if (obj2 is Plant){
-                        toAdd.Add(new Poop(new Point(obj2.Location.X,obj2.Location.Y),300));
+                    if (obj is Plant){
+                        toAdd.Add(new Poop(new Point(obj.Location.X,obj.Location.Y),300));
                     }
-                    toRemove.Add(obj2);
+                    toRemove.Add(obj);
                 }
                 if (obj is Animal)
             {
-                    Animal obj3 = (Animal)obj2;
+                    Animal obj3 = (Animal)obj;
                     if (obj3.CanPoop==true){
                         obj3.Poop();
                         toAdd.Add(new Poop(new Point(obj3.Location.X,obj3.Location.Y),300));
