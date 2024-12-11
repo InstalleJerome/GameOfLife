@@ -29,6 +29,10 @@ public partial class MainWindowViewModel : GameBase
         GameObjects.Add(plant);
 
     }
+    public static double Distance(GameObject obj1, GameObject obj2){
+        double x =Math.Sqrt(Math.Pow(obj2.Location.X-obj1.Location.X,2)+Math.Pow(obj2.Location.Y-obj1.Location.Y, 2));
+        return x;
+    }
     protected override void Tick(){
         List<GameObject> toRemove = new List<GameObject>();
         List<GameObject> toAdd = new List<GameObject>();
