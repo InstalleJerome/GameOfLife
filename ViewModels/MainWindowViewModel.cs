@@ -61,7 +61,11 @@ public partial class MainWindowViewModel : GameBase
                             toRemove.Add(obj2);
                         }
                     }
-                    
+                    if (obj2 is Stegosaure){
+                        if (Distance(obj,obj2)<150){
+                            obj2.Health = obj2.Health-100;
+                        }
+                    }
                 }
             }
             if (obj is Meat && obj.Health==0){
