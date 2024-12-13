@@ -18,4 +18,8 @@ public partial class Plant : Living_Object{
             Health--;
         }
     }
+    public override void Eat()
+    {
+        Energy = Energy + 30;
+    }
 }

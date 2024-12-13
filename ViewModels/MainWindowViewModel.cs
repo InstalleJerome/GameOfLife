@@ -38,6 +38,15 @@ public partial class MainWindowViewModel : GameBase
         List<GameObject> toAdd = new List<GameObject>();
 
         foreach (GameObject obj in GameObjects){
+            foreach(GameObject obj2 in GameObjects){
+                if (obj is Plant && obj2 is Poop){
+                    if (Distance(obj, obj2)<250){
+                        Plant obj1 = (Plant)obj;
+                        obj1.Eat();
+                        toRemove.Add(obj2);
+                    }
+                }
+            }
             if (obj is Meat && obj.Health==0){
                 toAdd.Add(new Poop(new Point(obj.Location.X,obj.Location.Y),300));
                 toRemove.Add(obj);
