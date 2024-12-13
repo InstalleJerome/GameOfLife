@@ -21,9 +21,9 @@ public partial class MainWindowViewModel : GameBase
     public ObservableCollection<GameObject> GameObjects { get; } = new();
 
     public MainWindowViewModel(){
-        trex = new TRex(new Point(Width/2-32, Height/2-32), 500, new Point(4.0,2.0), 200, DateTime.MinValue);
-        stegosaure = new Stegosaure(new Point(0,0), 800, new Point(2.5, 2.0), 200, DateTime.MinValue);
-        plant = new Plant(new Point(Width/2, Height/2), 600, 200);
+        trex = new TRex(new Point(Width/2-32, Height/2-32), 500, new Point(4.0,2.0), 200, DateTime.MinValue, DateTime.MinValue);
+        stegosaure = new Stegosaure(new Point(0,0), 800, new Point(2.5, 2.0), 200, DateTime.MinValue, DateTime.MinValue);
+        plant = new Plant(new Point(Width/2, Height/2), 600, 200, DateTime.MinValue);
         GameObjects.Add(trex);
         GameObjects.Add(stegosaure);
         GameObjects.Add(plant);
@@ -40,11 +40,28 @@ public partial class MainWindowViewModel : GameBase
         foreach (GameObject obj in GameObjects){
             foreach(GameObject obj2 in GameObjects){
                 if (obj is Plant && obj2 is Poop){
-                    if (Distance(obj, obj2)<250){
-                        Plant obj1 = (Plant)obj;
+                    Plant obj1 = (Plant)obj;
+                    if (Distance(obj, obj2)<250 && obj1.CanEat == true){                        
                         obj1.Eat();
                         toRemove.Add(obj2);
                     }
+                }
+                else if (obj is Stegosaure && obj2 is Plant){
+                    Stegosaure obj4 = (Stegosaure)obj;
+                    if (Distance(obj,obj2)<300 && obj4.CanEat == true){
+                        obj4.Eat();
+                        toRemove.Add(obj2);
+                    } 
+                }
+                else if (obj is TRex){
+                    if (obj2 is Meat){
+                        TRex obj5 = (TRex)obj;
+                        if (Distance(obj,obj2)<150 && obj5.CanEat == true){
+                            obj5.Eat();
+                            toRemove.Add(obj2);
+                        }
+                    }
+                    
                 }
             }
             if (obj is Meat && obj.Health==0){

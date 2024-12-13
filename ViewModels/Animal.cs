@@ -22,7 +22,7 @@ public abstract partial class Animal : Living_Object{
 
     public abstract void Poop();
 
-    public Animal(Point location, int health, Point velocity, int energy, DateTime lastPoop) : base(location, health, energy){
+    public Animal(Point location, int health, Point velocity, int energy, DateTime lastPoop, DateTime lastEat) : base(location, health, energy, lastEat){
         Velocity = velocity;
         this.lastPoop = lastPoop;
     }
