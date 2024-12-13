@@ -22,15 +22,15 @@ public partial class MainWindowViewModel : GameBase
 
     public MainWindowViewModel(){
         trex = new TRex(new Point(Width/2-32, Height/2-32), 500, new Point(4.0,2.0), 200, DateTime.MinValue, DateTime.MinValue);
-        stegosaure = new Stegosaure(new Point(0,0), 800, new Point(2.5, 2.0), 200, DateTime.MinValue, DateTime.MinValue);
-        plant = new Plant(new Point(Width/2, Height/2), 600, 200, DateTime.MinValue);
+        stegosaure = new Stegosaure(new Point(0,0), 800, new Point(2.5, 2.0), 200, DateTime.MinValue);
+        plant = new Plant(new Point(Width/2, Height/2), 600, 200);
         GameObjects.Add(trex);
         GameObjects.Add(stegosaure);
         GameObjects.Add(plant);
 
     }
     public static double Distance(GameObject obj1, GameObject obj2){
-        double x =Math.Sqrt(Math.Pow(obj2.Location.X-obj1.Location.X,2)+Math.Pow(obj2.Location.Y-obj1.Location.Y, 2));
+        double x = Math.Sqrt(Math.Pow(obj2.Location.X-obj1.Location.X,2) + Math.Pow(obj2.Location.Y-obj1.Location.Y, 2));
         return x;
     }
     protected override void Tick(){
@@ -41,29 +41,30 @@ public partial class MainWindowViewModel : GameBase
             foreach(GameObject obj2 in GameObjects){
                 if (obj is Plant && obj2 is Poop){
                     Plant obj1 = (Plant)obj;
-                    if (Distance(obj, obj2)<250 && obj1.CanEat == true){                        
+                    if (Distance(obj, obj2)<100 && obj1.Energy<100){                        
                         obj1.Eat();
                         toRemove.Add(obj2);
                     }
                 }
                 else if (obj is Stegosaure && obj2 is Plant){
                     Stegosaure obj4 = (Stegosaure)obj;
-                    if (Distance(obj,obj2)<300 && obj4.CanEat == true){
+                    if (Distance(obj,obj2)<100 && obj4.Energy<100){
                         obj4.Eat();
                         toRemove.Add(obj2);
                     } 
                 }
                 else if (obj is TRex){
-                    if (obj2 is Meat){
-                        TRex obj5 = (TRex)obj;
-                        if (Distance(obj,obj2)<150 && obj5.CanEat == true){
+                    TRex obj5 = (TRex)obj;
+                    if (obj2 is Meat){                        
+                        if (Distance(obj,obj2)<200 && obj5.Energy<150){
                             obj5.Eat();
                             toRemove.Add(obj2);
                         }
                     }
                     if (obj2 is Stegosaure){
-                        if (Distance(obj,obj2)<150){
+                        if (Distance(obj,obj2)<150 && obj5.CanAttack == true){
                             obj2.Health = obj2.Health-100;
+                            obj5.lastAttack = DateTime.Now;
                         }
                     }
                 }

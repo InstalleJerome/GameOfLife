@@ -7,10 +7,17 @@ namespace GameOfLife.ViewModels;
 
 public partial class TRex : Animal {
 
-    
+    public const int attackCooldown = 2;
+    public DateTime lastAttack{get; set;} = DateTime.Now;
 
-    public TRex(Point location, int health, Point velocity, int energy, DateTime lastPoop, DateTime lastEat) : base (location, health, velocity, energy, lastPoop, lastEat){
+    public bool CanAttack {
+        get {
+            return (DateTime.Now-lastAttack).TotalSeconds>attackCooldown;
+        }
+    }
 
+    public TRex(Point location, int health, Point velocity, int energy, DateTime lastPoop, DateTime lastAttack) : base (location, health, velocity, energy, lastPoop){
+        this.lastAttack = lastAttack;
     }
 
     public override void Poop(){
@@ -29,6 +36,5 @@ public partial class TRex : Animal {
     public override void Eat()
     {
         Energy=Energy+100;
-        lastEat = DateTime.Now;
     }
 }

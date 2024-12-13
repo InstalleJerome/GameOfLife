@@ -7,7 +7,7 @@ namespace GameOfLife.ViewModels;
 
 public partial class Plant : Living_Object{
 
-    public Plant(Point location, int health, int energy, DateTime lastEat) : base (location, health, energy, lastEat){
+    public Plant(Point location, int health, int energy) : base (location, health, energy){
 
     }
     public override void Tick(){
@@ -21,6 +21,5 @@ public partial class Plant : Living_Object{
     public override void Eat()
     {
         Energy = Energy + 100;
-        lastEat = DateTime.Now;
     }
 }
