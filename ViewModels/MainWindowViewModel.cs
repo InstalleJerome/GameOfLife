@@ -21,7 +21,7 @@ public partial class MainWindowViewModel : GameBase
     public ObservableCollection<GameObject> GameObjects { get; } = new();
 
     public MainWindowViewModel(){
-        trex = new TRex(new Point(Width/2-32, Height/2-32), 500, new Point(4.0,2.0), 200, DateTime.MinValue, DateTime.MinValue);
+        trex = new TRex(new Point(Width/2-32, Height/2-32), 500, new Point(4.0,-1.5), 200, DateTime.MinValue, DateTime.MinValue);
         stegosaure = new Stegosaure(new Point(0,0), 800, new Point(2.5, 2.0), 200, DateTime.MinValue);
         plant = new Plant(new Point(Width/2, Height/2), 600, 200);
         GameObjects.Add(trex);
@@ -48,7 +48,13 @@ public partial class MainWindowViewModel : GameBase
                 }
                 else if (obj is Stegosaure && obj2 is Plant){
                     Stegosaure obj4 = (Stegosaure)obj;
-                    if (Distance(obj,obj2)<100 && obj4.Energy<100){
+                    if (Distance(obj,obj2)<400){
+                        Vector direction = new Vector(obj2.Location.X-obj.Location.X, obj2.Location.Y-obj.Location.Y);
+                        Point dir = (Point)direction.Normalize();
+                        double length = Math.Sqrt(Math.Pow(obj4.Velocity.X, 2)+Math.Pow(obj4.Velocity.Y,2));
+                        obj4.Velocity = dir*length;
+                    }
+                    if (Distance(obj,obj2)<60){
                         obj4.Eat();
                         toRemove.Add(obj2);
                     } 
@@ -62,6 +68,12 @@ public partial class MainWindowViewModel : GameBase
                         }
                     }
                     if (obj2 is Stegosaure){
+                        if (Distance(obj,obj2)<600){
+                            Vector direction = new Vector(obj2.Location.X-obj.Location.X, obj2.Location.Y-obj.Location.Y);
+                            Point dir = (Point)direction.Normalize();
+                            double length = Math.Sqrt(Math.Pow(obj5.Velocity.X, 2)+Math.Pow(obj5.Velocity.Y,2));
+                            obj5.Velocity = dir*length; 
+                        }
                         if (Distance(obj,obj2)<150 && obj5.CanAttack == true){
                             obj2.Health = obj2.Health-100;
                             obj5.lastAttack = DateTime.Now;
