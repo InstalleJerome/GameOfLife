@@ -16,10 +16,14 @@ public partial class TRex : Animal {
         }
     }
 
-    public TRex(Point location, int health, Point velocity, int energy, DateTime lastPoop, DateTime lastAttack) : base (location, health, velocity, energy, lastPoop){
+    public TRex(Point location, int health, Point velocity, int energy, DateTime lastPoop, DateTime lastAttack, DateTime lastReproduce) : base (location, health, velocity, energy, lastPoop, lastReproduce){
         this.lastAttack = lastAttack;
     }
 
+    public override void Reproduce()
+    {
+        lastReproduce = DateTime.Now;
+    }
     public override void Poop(){
         lastPoop = DateTime.Now;
     }

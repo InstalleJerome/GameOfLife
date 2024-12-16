@@ -9,9 +9,21 @@ public abstract partial class Living_Object : GameObject{
     [ObservableProperty]
     private int energy;
 
-    public Living_Object(Point location, int energy,int health) : base(location, health){
+    public const int ReproduceCooldown = 8;
+    public DateTime lastReproduce{get; set;} = DateTime.Now;
+
+    public bool CanReproduce{
+        get{
+            return(DateTime.Now-lastReproduce).TotalSeconds>ReproduceCooldown;
+        }
+    }
+
+    public abstract void Reproduce();
+
+    public Living_Object(Point location, int energy,int health, DateTime lastReproduce) : base(location, health){
         Health = health;
         Energy = energy;
+        this.lastReproduce = lastReproduce;
     }
     
 

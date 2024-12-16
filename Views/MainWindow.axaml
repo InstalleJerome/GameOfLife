@@ -37,12 +37,12 @@
             <ItemsControl.DataTemplates>
                 <DataTemplate DataType="{x:Type vm:TRex}">
                     <Grid>
-                        <Image Width="100" Height="100"
+                        <Image Width="50" Height="50"
                             Source="/Assets/T-Rex.png" />
                         <TextBlock Text = "{Binding Health}"
                                 HorizontalAlignment = "Center"
                                 VerticalAlignment = "Top"
-                                Margin = "0,100,0,0"
+                                Margin = "0,50,0,0"
                                 Foreground  = "Red"
                                 FontSize = "14"/>
                         <TextBlock Text = "{Binding Energy}"
@@ -55,12 +55,12 @@
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:Stegosaure}">
                     <Grid>
-                        <Image Width="100" Height="100"
+                        <Image Width="50" Height="50"
                             Source="/Assets/Stegosaure.png" />
                         <TextBlock Text = "{Binding Health}"
                                 HorizontalAlignment = "Center"
                                 VerticalAlignment = "Top"
-                                Margin = "0,100,0,0"
+                                Margin = "0,50,0,0"
                                 Foreground  = "Red"
                                 FontSize = "14"/>
                         <TextBlock Text = "{Binding Energy}"
@@ -73,12 +73,12 @@
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:Plant}">
                     <Grid>
-                        <Image Width="100" Height="100"
+                        <Image Width="50" Height="50"
                             Source="/Assets/Fougere.png" />
                         <TextBlock Text = "{Binding Health}"
                                 HorizontalAlignment = "Center"
                                 VerticalAlignment = "Top"
-                                Margin = "0,100,0,0"
+                                Margin = "0,50,0,0"
                                 Foreground  = "Red"
                                 FontSize = "14"/>
                         <TextBlock Text = "{Binding Energy}"
@@ -91,24 +91,24 @@
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:Meat}">
                     <Grid>
-                        <Image Width="100" Height="100"
+                        <Image Width="50" Height="50"
                             Source="/Assets/Meat.png" />
                         <TextBlock Text = "{Binding Health}"
                                 HorizontalAlignment = "Center"
                                 VerticalAlignment = "Top"
-                                Margin = "0,100,0,0"
+                                Margin = "0,50,0,0"
                                 Foreground  = "Red"
                                 FontSize = "14"/>
                     </Grid>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:Poop}">
                     <Grid>
-                        <Image Width="100" Height="100"
+                        <Image Width="50" Height="50"
                             Source="/Assets/Poop.png" />
                         <TextBlock Text = "{Binding Health}"
                                 HorizontalAlignment = "Center"
                                 VerticalAlignment = "Top"
-                                Margin = "0,100,0,0"
+                                Margin = "0,50,0,0"
                                 Foreground  = "Red"
                                 FontSize = "14"/>
                     </Grid>

@@ -18,12 +18,13 @@ public abstract partial class Animal : Living_Object{
             return (DateTime.Now-lastPoop).TotalSeconds>PoopCooldown;
         }
     }
-    
-    
 
+    
+    
+    
     public abstract void Poop();
 
-    public Animal(Point location, int health, Point velocity, int energy, DateTime lastPoop) : base(location, health, energy){
+    public Animal(Point location, int health, Point velocity, int energy, DateTime lastPoop, DateTime lastReproduce) : base(location, health, energy, lastReproduce){
         Velocity = velocity;
         this.lastPoop = lastPoop;
     }
