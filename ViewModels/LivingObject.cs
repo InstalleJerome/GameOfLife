@@ -10,7 +10,7 @@ public abstract partial class Living_Object : GameObject{
     private int energy;
 
     public const int ReproduceCooldown = 8;
-    public DateTime lastReproduce{get; set;} = DateTime.Now;
+    public DateTime lastReproduce{get; set;}
 
     public bool CanReproduce{
         get{
@@ -20,10 +20,10 @@ public abstract partial class Living_Object : GameObject{
 
     public abstract void Reproduce();
 
-    public Living_Object(Point location, int energy,int health, DateTime lastReproduce) : base(location, health){
+    public Living_Object(Point location, int energy,int health) : base(location, health){
         Health = health;
         Energy = energy;
-        this.lastReproduce = lastReproduce;
+        this.lastReproduce = DateTime.Now;
     }
     
 

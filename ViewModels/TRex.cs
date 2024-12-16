@@ -7,7 +7,7 @@ namespace GameOfLife.ViewModels;
 
 public partial class TRex : Animal {
 
-    public const int attackCooldown = 2;
+    public const int attackCooldown = 1;
     public DateTime lastAttack{get; set;} = DateTime.Now;
 
     public bool CanAttack {
@@ -16,7 +16,7 @@ public partial class TRex : Animal {
         }
     }
 
-    public TRex(Point location, int health, Point velocity, int energy, DateTime lastPoop, DateTime lastAttack, DateTime lastReproduce) : base (location, health, velocity, energy, lastPoop, lastReproduce){
+    public TRex(Point location, int health, Point velocity, int energy, DateTime lastAttack) : base (location, health, velocity, energy){
         this.lastAttack = lastAttack;
     }
 

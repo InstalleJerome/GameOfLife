@@ -18,18 +18,33 @@ public partial class MainWindowViewModel : GameBase
     private TRex trex;
     private Stegosaure stegosaure;
     private Stegosaure stegosaure2;
+    private Stegosaure stegosaure3;
     private Plant plant;
     public ObservableCollection<GameObject> GameObjects { get; } = new();
 
     public MainWindowViewModel(){
-        trex = new TRex(new Point(Width/2-32, Height/2-32), 500, new Point(1.5,-1.5), 200, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue);
-        stegosaure = new Stegosaure(new Point(0,0), 1200, new Point(1.0, 2.0), 1000, DateTime.MinValue, DateTime.MinValue);
-        plant = new Plant(new Point(Width/2, Height/2), 600, 200, DateTime.MinValue);
-        stegosaure2 = new Stegosaure(new Point(500,400), 1200, new Point(-1.0, -2), 1000, DateTime.MinValue, DateTime.MinValue);
+        trex = new TRex(RandomLocation(0, Width, 0, Height), 500, new Point(1.5,-1.5), 200, DateTime.Now);
+        stegosaure = new Stegosaure(new Point(0,0), 600, new Point(1.0, 2.0), 1000);
+        plant = new Plant(new Point(Width/2, Height/2), 600, 200, DateTime.Now, 200, 400);
+        stegosaure2 = new Stegosaure(new Point(500,400), 600, RandomVelocity(-2,2,-2,2), 1000);
         GameObjects.Add(trex);
         GameObjects.Add(stegosaure);
         GameObjects.Add(plant);
         GameObjects.Add(stegosaure2);
+        stegosaure3 = new Stegosaure(new Point(600,600), 1200, RandomVelocity(-2,2,-2,2), 1000);
+        GameObjects.Add(stegosaure3);
+    }
+    private Random random = new Random();
+
+    private Point RandomVelocity(int minX, int maxX, int minY, int maxY){
+        double X = random.Next(minX,maxX);
+        double Y = random.Next(minY, maxY);
+        return new Point(X,Y);
+    }
+    private Point RandomLocation(int minX, int maxX, int minY, int maxY){
+        double X = random.Next(minX, maxX);
+        double Y = random.Next(minY, maxY);
+        return new Point(X,Y);
     }
     public static double Distance(GameObject obj1, GameObject obj2){
         double x = Math.Sqrt(Math.Pow(obj2.Location.X-obj1.Location.X,2) + Math.Pow(obj2.Location.Y-obj1.Location.Y, 2));
@@ -41,11 +56,17 @@ public partial class MainWindowViewModel : GameBase
 
         foreach (GameObject obj in GameObjects){
             foreach(GameObject obj2 in GameObjects){
-                if (obj is Plant && obj2 is Poop){
+                if (obj is Plant){
                     Plant obj1 = (Plant)obj;
-                    if (Distance(obj, obj2)<200 && obj1.Energy<100){                        
-                        obj1.Eat();
-                        toRemove.Add(obj2);
+                    if (obj2 is Poop){
+                        if (Distance(obj, obj2)<200 && obj1.Energy<100){                        
+                            obj1.Eat();
+                            toRemove.Add(obj2);
+                        }
+                    }
+                    if (obj1.CanReproduce == true){
+                        obj1.Reproduce();
+                        toAdd.Add(new Plant(RandomLocation((int)obj1.Location.X-obj1.SeedingRadius, (int)obj1.Location.X+obj1.SeedingRadius, (int)obj1.Location.Y-obj1.SeedingRadius, (int)obj1.Location.Y+obj1.SeedingRadius), 600, 200, DateTime.MinValue, 200, 400));
                     }
                 }
                 else if (obj is Stegosaure){
@@ -67,7 +88,7 @@ public partial class MainWindowViewModel : GameBase
                         if (obj4.CanReproduce == true && obj6.CanReproduce == true){
                             obj4.Reproduce();
                             obj6.Reproduce();
-                            toAdd.Add(new Stegosaure(new Point((obj4.Location.X+obj6.Location.X)/2, (obj4.Location.Y+obj6.Location.Y)/2), 800, new Point(-1.0,1.6), 600, DateTime.MaxValue, DateTime.MinValue));
+                            toAdd.Add(new Stegosaure(new Point((obj4.Location.X+obj6.Location.X)/2, (obj4.Location.Y+obj6.Location.Y)/2), 800, RandomVelocity(-2,2,-2,2), 600));
                         }
                         
                     }
@@ -81,17 +102,26 @@ public partial class MainWindowViewModel : GameBase
                         }
                     }
                     if (obj2 is Stegosaure){
-                        if (Distance(obj,obj2)<600){
+                        if (Distance(obj,obj2)<300){
                             Vector direction = new Vector(obj2.Location.X-obj.Location.X, obj2.Location.Y-obj.Location.Y);
                             Point dir = (Point)direction.Normalize();
                             double length = Math.Sqrt(Math.Pow(obj5.Velocity.X, 2)+Math.Pow(obj5.Velocity.Y,2));
                             obj5.Velocity = dir*length; 
                         }
                         if (Distance(obj,obj2)<50 && obj5.CanAttack == true){
-                            obj2.Health = obj2.Health-100;
+                            obj2.Health = obj2.Health-200;
                             obj5.lastAttack = DateTime.Now;
                         }
 
+                    }
+                    if (obj2 is TRex && Distance(obj,obj2)<100 && obj2 != obj){
+                        TRex obj6 = (TRex)obj2;
+                        if (obj5.CanReproduce == true && obj6.CanReproduce == true){
+                            obj5.Reproduce();
+                            obj6.Reproduce();
+                            toAdd.Add(new TRex(new Point((obj5.Location.X+obj6.Location.X)/2, (obj5.Location.Y+obj6.Location.Y)/2), 800, RandomVelocity(-2,2,-2,2), 600, DateTime.MinValue));
+                        }
+                        
                     }
                 }
             }
@@ -106,7 +136,7 @@ public partial class MainWindowViewModel : GameBase
             {
                 if (obj.Health==0){
                     if (obj is Animal){
-                    toAdd.Add(new Meat(new Point(obj.Location.X,obj.Location.Y),200));
+                    toAdd.Add(new Meat(new Point(obj.Location.X,obj.Location.Y),800));
                     }
                     if (obj is Plant){
                         toAdd.Add(new Poop(new Point(obj.Location.X,obj.Location.Y),300));

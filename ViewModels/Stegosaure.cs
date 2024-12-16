@@ -8,7 +8,7 @@ namespace GameOfLife.ViewModels;
 
 public partial class Stegosaure : Animal {
     
-    public Stegosaure(Point location, int health, Point velocity,  int energy, DateTime lastPoop, DateTime lastReproduce) : base (location, health, velocity, energy, lastPoop, lastReproduce){
+    public Stegosaure(Point location, int health, Point velocity,  int energy) : base (location, health, velocity, energy){
         
     }
 
