@@ -10,7 +10,7 @@ public partial class Plant : Living_Object{
     private int eatingRadius;
     [ObservableProperty]
     private int seedingRadius;
-    public Plant(Point location, int health, int energy, DateTime lastReproduce, int eatingRadius, int seedingRadius) : base (location, health, energy){
+    public Plant(Point location, int health, int energy, int eatingRadius, int seedingRadius) : base (location, health, energy){
         EatingRadius = eatingRadius;
         SeedingRadius = seedingRadius;
     }

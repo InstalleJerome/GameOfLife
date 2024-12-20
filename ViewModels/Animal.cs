@@ -10,7 +10,7 @@ public abstract partial class Animal : Living_Object{
     [ObservableProperty]
     private Point velocity;
 
-    public const int PoopCooldown = 5;
+    public const int PoopCooldown = 8;
     public DateTime lastPoop{get; set;}
 
     public bool CanPoop {
