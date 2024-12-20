@@ -19,9 +19,13 @@ public partial class MainWindowViewModel : GameBase
     private Stegosaure stegosaure;
     private Stegosaure stegosaure2;
     private Stegosaure stegosaure3;
+    private Stegosaure stegosaure4;
+    private Stegosaure stegosaure5;
     private Plant plant;
     private Plant plant2;
     private TRex trex2;
+    private Plant plant3;
+
     public ObservableCollection<GameObject> GameObjects { get; } = new();
 
     public MainWindowViewModel(){
@@ -39,6 +43,11 @@ public partial class MainWindowViewModel : GameBase
         GameObjects.Add(plant2);
         trex2 = new TRex(RandomLocation(0, Width-100, 0, Height-50), 800, new Point(1.5, 1.5), 1000, "female");
         GameObjects.Add(trex2);
+        stegosaure4 = new Stegosaure(RandomLocation(0,Width-100, 0, Height-50), 600, RandomVelocity(-2, 2, -2, 2), 1000, "female");
+        stegosaure5 = new Stegosaure(RandomLocation(0,Width-100, 0, Height-50), 600, RandomVelocity(-2, 2, -2, 2), 1000, "male");
+        GameObjects.Add(stegosaure4);
+        GameObjects.Add(stegosaure5);
+        plant3 = new Plant(RandomLocation(0,Width-100, 0, Height-50), 600, 200, 200, 400);
     }
     private Random random = new Random();
 
@@ -50,6 +59,12 @@ public partial class MainWindowViewModel : GameBase
     private Point RandomLocation(int minX, int maxX, int minY, int maxY){
         double X = random.Next(minX, maxX);
         double Y = random.Next(minY, maxY);
+        if (X < 0 || X > Width){
+            X = random.Next(minX, maxX);
+        }
+        if (Y < 0 || Y > Height){
+            Y = random.Next(minY, maxY);
+        }
         return new Point(X,Y);
     }
 
