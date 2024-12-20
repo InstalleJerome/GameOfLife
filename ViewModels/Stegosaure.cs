@@ -8,13 +8,14 @@ namespace GameOfLife.ViewModels;
 
 public partial class Stegosaure : Animal {
     
-    public Stegosaure(Point location, int health, Point velocity,  int energy) : base (location, health, velocity, energy){
+    public Stegosaure(Point location, int health, Point velocity,  int energy, string sex) : base (location, health, velocity, energy, sex){
         
     }
 
     public override void Reproduce()
-    {
-        lastReproduce = DateTime.Now;
+    {   if (Sex == "female"){
+            lastReproduce = DateTime.Now;
+        }
     }
     public override void Poop(){
         lastPoop = DateTime.Now;

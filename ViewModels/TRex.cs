@@ -16,13 +16,15 @@ public partial class TRex : Animal {
         }
     }
 
-    public TRex(Point location, int health, Point velocity, int energy) : base (location, health, velocity, energy){
+    public TRex(Point location, int health, Point velocity, int energy, string sex) : base (location, health, velocity, energy, sex){
         this.lastAttack = DateTime.Now;
     }
 
     public override void Reproduce()
     {
-        lastReproduce = DateTime.Now;
+        if (Sex == "female"){
+            lastReproduce = DateTime.Now;
+        }
     }
     public override void Poop(){
         lastPoop = DateTime.Now;

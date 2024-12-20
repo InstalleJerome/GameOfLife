@@ -25,19 +25,19 @@ public partial class MainWindowViewModel : GameBase
     public ObservableCollection<GameObject> GameObjects { get; } = new();
 
     public MainWindowViewModel(){
-        trex = new TRex(RandomLocation(0, Width-100, 0, Height-50), 800, new Point(1.5,1.5), 1000);
-        stegosaure = new Stegosaure(RandomLocation(0,Width-100, 0, Height-50), 600, RandomVelocity(-2, 2, -2, 2), 1000);
+        trex = new TRex(RandomLocation(0, Width-100, 0, Height-50), 800, new Point(1.5,1.5), 1000, "male");
+        stegosaure = new Stegosaure(RandomLocation(0,Width-100, 0, Height-50), 600, RandomVelocity(-2, 2, -2, 2), 1000, "male");
         plant = new Plant(new Point(Width/2, Height/2), 600, 200, 200, 400);
-        stegosaure2 = new Stegosaure(RandomLocation(0,Width-100, 0, Height-50), 600, RandomVelocity(-2,2,-2,2), 1000);
+        stegosaure2 = new Stegosaure(RandomLocation(0,Width-100, 0, Height-50), 600, RandomVelocity(-2,2,-2,2), 1000, "female");
         GameObjects.Add(trex);
         GameObjects.Add(stegosaure);
         GameObjects.Add(plant);
         GameObjects.Add(stegosaure2);
-        stegosaure3 = new Stegosaure(RandomLocation(0,Width-100, 0, Height-50), 1200, RandomVelocity(-2,2,-2,2), 1000);
+        stegosaure3 = new Stegosaure(RandomLocation(0,Width-100, 0, Height-50), 1200, RandomVelocity(-2,2,-2,2), 1000, "female");
         GameObjects.Add(stegosaure3);
         plant2 = new Plant(RandomLocation(0,Width-100, 0, Height-50), 600, 200, 200, 400);
         GameObjects.Add(plant2);
-        trex2 = new TRex(RandomLocation(0, Width-100, 0, Height-50), 800, new Point(1.5, 1.5), 1000);
+        trex2 = new TRex(RandomLocation(0, Width-100, 0, Height-50), 800, new Point(1.5, 1.5), 1000, "female");
         GameObjects.Add(trex2);
     }
     private Random random = new Random();
@@ -51,6 +51,16 @@ public partial class MainWindowViewModel : GameBase
         double X = random.Next(minX, maxX);
         double Y = random.Next(minY, maxY);
         return new Point(X,Y);
+    }
+
+    private string RandomSex(){
+        double x = random.Next(1,2);
+        if (x==1){
+            return "female";
+        }
+        else{
+            return "male";
+        }
     }
     public static double Distance(GameObject obj1, GameObject obj2){
         double x = Math.Sqrt(Math.Pow(obj2.Location.X-obj1.Location.X,2) + Math.Pow(obj2.Location.Y-obj1.Location.Y, 2));
@@ -97,17 +107,17 @@ public partial class MainWindowViewModel : GameBase
                     }
                     if (obj2 is Stegosaure){
                         Stegosaure obj6 = (Stegosaure)obj2;
-                        if (obj4.CanReproduce == true && Distance(obj4,obj6)<400 && obj2 != obj){
+                        if (obj4.CanReproduce == true && obj4.Sex == "male" && Distance(obj4,obj6)<400 && obj2 != obj && obj6.Sex=="female"){
                             Vector direction = new Vector(obj2.Location.X-obj.Location.X, obj2.Location.Y-obj.Location.Y);
                             Point dir = (Point)direction.Normalize();
                             double length = Math.Sqrt(Math.Pow(obj4.Velocity.X, 2)+Math.Pow(obj4.Velocity.Y,2));
                             obj4.Velocity = dir*length;
                         }
                         if (Distance(obj,obj2)<100 && obj2 != obj){
-                            if (obj4.CanReproduce == true && obj6.CanReproduce == true){
+                            if (obj4.CanReproduce == true && obj4.Sex == "male" && obj6.CanReproduce == true && obj6.Sex=="female"){
                                 obj4.Reproduce();
                                 obj6.Reproduce();
-                                toAdd.Add(new Stegosaure(new Point((obj4.Location.X+obj6.Location.X)/2, (obj4.Location.Y+obj6.Location.Y)/2), 800, RandomVelocity(-2,2,-2,2), 600));
+                                toAdd.Add(new Stegosaure(new Point((obj4.Location.X+obj6.Location.X)/2, (obj4.Location.Y+obj6.Location.Y)/2), 800, RandomVelocity(-2,2,-2,2), 600, RandomSex()));
                                 obj4.Velocity = RandomVelocity(-2,2,-2,2);
                             }
                         }
@@ -137,16 +147,16 @@ public partial class MainWindowViewModel : GameBase
                     }
                     if (obj2 is TRex && Distance(obj,obj2)<100 && obj2 != obj){
                         TRex obj6 = (TRex)obj2;
-                        if (obj5.CanReproduce == true && Distance(obj5,obj6)<400 && obj2 != obj){
+                        if (obj5.CanReproduce == true && Distance(obj5,obj6)<400 && obj2 != obj && obj6.Sex == "female" && obj5.Sex == "male"){
                             Vector direction = new Vector(obj2.Location.X-obj.Location.X, obj2.Location.Y-obj.Location.Y);
                             Point dir = (Point)direction.Normalize();
                             double length = Math.Sqrt(Math.Pow(obj5.Velocity.X, 2)+Math.Pow(obj5.Velocity.Y,2));
                             obj5.Velocity = dir*length;
                         }
-                        if (obj5.CanReproduce == true && obj6.CanReproduce == true){
+                        if (obj5.CanReproduce == true && obj5.Sex == "male" &&obj6.CanReproduce == true && obj6.Sex == "female"){
                             obj5.Reproduce();
                             obj6.Reproduce();
-                            toAdd.Add(new TRex(new Point((obj5.Location.X+obj6.Location.X)/2, (obj5.Location.Y+obj6.Location.Y)/2), 800, RandomVelocity(-2,2,-2,2), 600));
+                            toAdd.Add(new TRex(new Point((obj5.Location.X+obj6.Location.X)/2, (obj5.Location.Y+obj6.Location.Y)/2), 800, RandomVelocity(-2,2,-2,2), 600, RandomSex()));
                             obj5.Velocity = RandomVelocity(-2,2,-2,2);
                             obj6.Velocity = RandomVelocity(-2,2,-2,2);
                         }
