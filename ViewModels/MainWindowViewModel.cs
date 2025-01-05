@@ -90,7 +90,7 @@ public partial class MainWindowViewModel : GameBase
                 if (obj is Plant){
                     Plant obj1 = (Plant)obj;
                     if (obj2 is Poop){
-                        if (Distance(obj, obj2)<200 && obj1.Energy<100){                        
+                        if (Distance(obj, obj2)<obj1.EatingRadius && obj1.Energy<600){                        
                             obj1.Eat();
                             toRemove.Add(obj2);
                         }
