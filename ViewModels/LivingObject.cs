@@ -9,7 +9,7 @@ public abstract partial class Living_Object : GameObject{
     [ObservableProperty]
     private int energy;
 
-    public const int ReproduceCooldown = 4;
+    public const int ReproduceCooldown = 3;
     public DateTime lastReproduce{get; set;}
 
     public bool CanReproduce{

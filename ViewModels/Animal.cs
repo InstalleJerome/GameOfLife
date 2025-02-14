@@ -15,7 +15,7 @@ public abstract partial class Animal : Living_Object{
 
     public const int PoopCooldown = 8;
     public DateTime lastPoop{get; set;}
-
+    
     public bool CanPoop {
         get {
             return (DateTime.Now-lastPoop).TotalSeconds>PoopCooldown;
